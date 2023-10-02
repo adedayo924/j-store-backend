@@ -1,7 +1,7 @@
 from django.urls import path
 
-from backend.views import create_account
+from backend.views import request_otp
 
 urlpatterns = [
-    path('create_account/', create_account),
+    path('request_otp/', request_otp),
 ]
