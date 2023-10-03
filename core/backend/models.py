@@ -8,6 +8,7 @@ class User(models.Model):
     password = models.CharField(max_length=5000)
     created_at = models.DateTimeField(auto_now_add=True)
 
+
 class Otp(models.Model):
     phone = models.CharField(max_length=10)
     otp = models.IntegerField()

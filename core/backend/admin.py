@@ -9,6 +9,7 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ['id', 'email', 'phone', 'fullname', 'created_at']
     readonly_fields = ['password']
 
+
 @register(Otp)
 class OtpAdmin(admin.ModelAdmin):
     list_display = ['phone', 'otp', 'validity', 'verified']

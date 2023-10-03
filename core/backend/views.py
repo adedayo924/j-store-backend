@@ -1,5 +1,6 @@
 import datetime
 
+from django.contrib.auth.hashers import make_password
 from rest_framework.decorators import api_view
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
@@ -41,3 +42,18 @@ def verify_otp(request):
         return Response('Otp expired', 400)
 
 
+@api_view(['POST'])
+def create_account(request):
+    email = request.data.get('email')
+    phone = request.data.get('phone')
+    fullname = request.data.get('fullname')
+    password = request.data.get('password')
+
+    if email and phone and fullname and password:
+        otp_obj = get_object_or_404(Otp, phone=phone, verified=True)
+        otp_obj.delete()
+
+        User.objects.create(email=email, phone=phone, fullname=fullname, password=make_password(password))
+        return Response('account created successfully!')
+    else:
+        return Response('data_missng', 400)
