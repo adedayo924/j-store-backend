@@ -8,6 +8,9 @@ class User(models.Model):
     password = models.CharField(max_length=5000)
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return self.email
+
 
 class Otp(models.Model):
     phone = models.CharField(max_length=10)
@@ -17,3 +20,12 @@ class Otp(models.Model):
 
     def __str__(self):
         return self.phone
+
+
+class Token(models.Model):
+    token = models.CharField(max_length=5000)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tokens_set')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.email
