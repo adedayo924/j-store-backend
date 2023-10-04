@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.admin import register
 
-from backend.models import User, Otp, Token
+from backend.models import User, Otp, Token, PasswordResetToken
 
 
 @register(User)
@@ -18,3 +18,8 @@ class OtpAdmin(admin.ModelAdmin):
 @register(Token)
 class TokenAdmin(admin.ModelAdmin):
     list_display = ['token', 'user', 'created_at']
+
+
+@register(PasswordResetToken)
+class PasswordResetTokenAdmin(admin.ModelAdmin):
+    list_display = ['token', 'user', 'validity']
